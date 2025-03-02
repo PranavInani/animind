@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/home/pranav/projects/animind/output_videos/e1ee362d-317f-4261-964a-c92745cafa35/videos/e1ee362d-317f-4261-964a-c92745cafa35/720p30/partial_movie_files/BouncingBall/2016333726_2152683197_656162462.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/e1ee362d-317f-4261-964a-c92745cafa35/videos/e1ee362d-317f-4261-964a-c92745cafa35/720p30/partial_movie_files/BouncingBall/543634251_4217992463_1250959377.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/e1ee362d-317f-4261-964a-c92745cafa35/videos/e1ee362d-317f-4261-964a-c92745cafa35/720p30/partial_movie_files/BouncingBall/543634251_3544848866_3278502945.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/e1ee362d-317f-4261-964a-c92745cafa35/videos/e1ee362d-317f-4261-964a-c92745cafa35/720p30/partial_movie_files/BouncingBall/543634251_4217992463_3941037218.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/e1ee362d-317f-4261-964a-c92745cafa35/videos/e1ee362d-317f-4261-964a-c92745cafa35/720p30/partial_movie_files/BouncingBall/543634251_2844360058_3306977666.mp4'

@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/home/pranav/projects/animind/output_videos/ee1747a5-a140-44bc-805e-c5611d2815c1/videos/ee1747a5-a140-44bc-805e-c5611d2815c1/720p30/partial_movie_files/CircleToSquare/2016333726_1898478303_223132457.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/ee1747a5-a140-44bc-805e-c5611d2815c1/videos/ee1747a5-a140-44bc-805e-c5611d2815c1/720p30/partial_movie_files/CircleToSquare/543634251_3678819880_3481380946.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/ee1747a5-a140-44bc-805e-c5611d2815c1/videos/ee1747a5-a140-44bc-805e-c5611d2815c1/720p30/partial_movie_files/CircleToSquare/543634251_1837507020_1026230840.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/ee1747a5-a140-44bc-805e-c5611d2815c1/videos/ee1747a5-a140-44bc-805e-c5611d2815c1/720p30/partial_movie_files/CircleToSquare/543634251_2834709167_2382210872.mp4'
-file 'file:/home/pranav/projects/animind/output_videos/ee1747a5-a140-44bc-805e-c5611d2815c1/videos/ee1747a5-a140-44bc-805e-c5611d2815c1/720p30/partial_movie_files/CircleToSquare/543634251_2834709167_2624936658.mp4'
