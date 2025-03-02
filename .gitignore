@@ -1,0 +1,16 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Generated content
+generated_scripts/
+output_videos/
+media/
+*.mp4
+
+# Environment variables
+.env
+
+# Logs
+*.log
