@@ -1,0 +1,6 @@
+gradio>=3.36.1
+langchain>=0.0.275
+langchain-groq>=0.1.0
+manim>=0.17.3
+ffmpeg-python
+python-dotenv>=1.0.0
