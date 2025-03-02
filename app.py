@@ -38,9 +38,10 @@ def create_animation(user_input):
         return None, f"An unexpected error occurred: {str(e)}"
 
 # Set up the Gradio interface
-with gr.Blocks(title="Text to Manim Animation") as iface:
-    gr.Markdown("# Text to Manim Animation")
-    gr.Markdown("Enter a description of the animation you want to create, and see it generated in real-time!")
+with gr.Blocks(title="AniMind - AI-Powered Math Animations") as iface:
+    gr.Markdown("# ✨ AniMind")
+    gr.Markdown("### Transform your ideas into beautiful mathematical animations")
+    gr.Markdown("Enter a description of the animation you want to create, and watch as AI brings it to life!")
     
     with gr.Row():
         with gr.Column(scale=1):
