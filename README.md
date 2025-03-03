@@ -1,6 +1,12 @@
-# Manim Text to Animation
+# Animind - Manime Text to Animation
 
 This project is a web-based application that allows users to describe animations in natural language, which are then converted into executable Manim Python code. The application leverages LangChain and the Groq API for natural language processing and code generation.
+
+## Demo
+
+Watch our demo to see AniMind in action:
+
+https://github.com/user/animind/assets/demo.mp4
 
 ## Project Structure
 
