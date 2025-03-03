@@ -6,7 +6,7 @@ This project is a web-based application that allows users to describe animations
 
 Watch our demo to see AniMind in action:
 
-https://github.com/user/animind/assets/demo.mp4
+![Demo](https://github.com/PranavInani/animind/blob/main/demo.mp4)
 
 ## Project Structure
 
