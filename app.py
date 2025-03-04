@@ -68,7 +68,6 @@ with gr.Blocks(title="AniMind - AI-Powered Math Animations") as iface:
             ["Create a bouncing ball animation"],
             ["Show a rotating cube"],
             ["Animate a sine wave"],
-            ["Display a growing tree"],
             ["Create a star twinkling"]
         ],
         inputs=input_text

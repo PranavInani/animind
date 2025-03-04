@@ -41,8 +41,10 @@ class ManimExecutor:
             # First, let's find the Scene class name from the Python file
             with open(script_path, 'r') as f:
                 content = f.read()
-                # Look for class declarations that inherit from Scene
-                scene_classes = re.findall(r'class\s+(\w+)\s*\(\s*Scene\s*\)', content)
+                # Look for class declarations that inherit from Scene or any Scene subclass
+                scene_pattern = r'class\s+(\w+)\s*\(\s*(\w*Scene)\s*\)'
+                matches = re.findall(scene_pattern, content)
+                scene_classes = [match[0] for match in matches]  # Extract class names
                 
             if scene_classes:
                 # Use the first scene class found
@@ -92,44 +94,38 @@ class ManimExecutor:
     def _find_output_video(self, output_dir):
         """Find the generated video file in the output directory."""
         import os
+        
+        # With the -qm flag and specified media_dir, Manim creates this standard path
+        expected_path = os.path.join(output_dir, "videos", 
+                                    os.path.basename(output_dir),
+                                    "720p30", 
+                                    f"{os.path.basename(output_dir)}.mp4")
+        
+        if os.path.exists(expected_path):
+            print(f"Found video: {expected_path}")
+            return expected_path
+        else:
+            print(f"Expected video not found at: {expected_path}")
+            # Fall back to searching if needed
+            return self._find_video_fallback(output_dir)
+    
+    def _find_video_fallback(self, output_dir):
+        """Fallback method to search for the video if not found at expected location."""
+        import os
         import glob
         
-        print(f"Looking for video in: {output_dir}")
+        print(f"Searching for video in: {output_dir}")
         
-        # Check common Manim output directory patterns
-        possible_paths = [
-            # Direct in output directory
-            os.path.join(output_dir, "*.mp4"),
-            # In videos subdirectory
-            os.path.join(output_dir, "videos", "*.mp4"),
-            # In videos/[quality] subdirectory
+        patterns = [
+            os.path.join(output_dir, "videos", os.path.basename(output_dir), "*", "*.mp4"),
             os.path.join(output_dir, "videos", "*", "*.mp4"),
-            # Match the exact nested pattern we're seeing
-            os.path.join(output_dir, "videos", os.path.basename(output_dir), "720p30", "*.mp4"),
-            # Broader search with any resolution
-            os.path.join(output_dir, "videos", os.path.basename(output_dir), "*", "*.mp4")
+            os.path.join(output_dir, "*.mp4")
         ]
         
-        # Try each pattern
-        for pattern in possible_paths:
+        for pattern in patterns:
             videos = glob.glob(pattern)
             if videos:
-                video_path = videos[0]  # Take the first match
-                print(f"Found video: {video_path}")
-                return video_path
+                return videos[0]
         
-        # If we get here, no video was found
         print(f"No video found in {output_dir}")
-        
-        # List some directories to help debug
-        print("Checking directory contents:")
-        if os.path.exists(os.path.join(output_dir, "videos")):
-            print(f"Contents of {os.path.join(output_dir, 'videos')}:")
-            print(os.listdir(os.path.join(output_dir, "videos")))
-            
-            nested_dir = os.path.join(output_dir, "videos", os.path.basename(output_dir))
-            if os.path.exists(nested_dir):
-                print(f"Contents of {nested_dir}:")
-                print(os.listdir(nested_dir))
-        
         return None
