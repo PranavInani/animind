@@ -1,7 +1,13 @@
+import os
+import re
+import uuid
+import subprocess
+import glob
+from src.utils import write_file, log_message, ensure_absolute_path
+
 class ManimExecutor:
     def __init__(self, script_dir=None, output_dir=None):
         from config import MANIM_SCRIPT_DIR, OUTPUT_VIDEO_DIR
-        import os
         
         self.script_dir = script_dir or MANIM_SCRIPT_DIR
         self.output_dir = output_dir or OUTPUT_VIDEO_DIR
@@ -11,10 +17,6 @@ class ManimExecutor:
         os.makedirs(self.output_dir, exist_ok=True)
     
     def execute(self, manim_code):
-        import os
-        from src.utils import write_file
-        import uuid
-        
         # Generate unique filenames
         script_id = str(uuid.uuid4())
         script_path = os.path.join(self.script_dir, f"{script_id}.py")
@@ -27,13 +29,12 @@ class ManimExecutor:
         self.execute_script(script_path, output_path)
         
         # Return the output video path
-        return self._find_output_video(output_path)
+        video_path = self._find_output_video(output_path)
+        if video_path:
+            return ensure_absolute_path(video_path)
+        return None
         
     def execute_script(self, script_path, output_path):
-        import subprocess
-        import os
-        import re
-        
         # Create output directory if it doesn't exist
         os.makedirs(output_path, exist_ok=True)
         
@@ -49,7 +50,7 @@ class ManimExecutor:
             if scene_classes:
                 # Use the first scene class found
                 scene_class = scene_classes[0]
-                print(f"Found Scene class: {scene_class}")
+                log_message(f"Found Scene class: {scene_class}")
                 
                 # Construct the manim command with explicit scene class
                 cmd = [
@@ -61,7 +62,7 @@ class ManimExecutor:
                 ]
             else:
                 # No scene class found, try rendering the whole file
-                print("No Scene class found, trying to render the whole file")
+                log_message("No Scene class found, trying to render the whole file")
                 cmd = [
                     "manim",
                     script_path,
@@ -79,22 +80,20 @@ class ManimExecutor:
             )
             
             # Log the output for debugging
-            print(f"Manim execution completed successfully")
-            print(f"Manim stdout: {result.stdout}")
+            log_message("Manim execution completed successfully")
+            log_message(f"Manim stdout: {result.stdout}")
             return True
             
         except subprocess.CalledProcessError as e:
-            print(f"Error executing Manim: {e}")
-            print(f"Error output: {e.stderr}")
+            log_message(f"Error executing Manim: {e}")
+            log_message(f"Error output: {e.stderr}")
             return False
         except Exception as e:
-            print(f"Unexpected error during Manim execution: {e}")
+            log_message(f"Unexpected error during Manim execution: {e}")
             return False
 
     def _find_output_video(self, output_dir):
         """Find the generated video file in the output directory."""
-        import os
-        
         # With the -qm flag and specified media_dir, Manim creates this standard path
         expected_path = os.path.join(output_dir, "videos", 
                                     os.path.basename(output_dir),
@@ -102,19 +101,16 @@ class ManimExecutor:
                                     f"{os.path.basename(output_dir)}.mp4")
         
         if os.path.exists(expected_path):
-            print(f"Found video: {expected_path}")
+            log_message(f"Found video: {expected_path}")
             return expected_path
         else:
-            print(f"Expected video not found at: {expected_path}")
+            log_message(f"Expected video not found at: {expected_path}")
             # Fall back to searching if needed
             return self._find_video_fallback(output_dir)
     
     def _find_video_fallback(self, output_dir):
         """Fallback method to search for the video if not found at expected location."""
-        import os
-        import glob
-        
-        print(f"Searching for video in: {output_dir}")
+        log_message(f"Searching for video in: {output_dir}")
         
         patterns = [
             os.path.join(output_dir, "videos", os.path.basename(output_dir), "*", "*.mp4"),
@@ -127,5 +123,5 @@ class ManimExecutor:
             if videos:
                 return videos[0]
         
-        print(f"No video found in {output_dir}")
+        log_message(f"No video found in {output_dir}")
         return None
