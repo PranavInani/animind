@@ -16,14 +16,10 @@ manim-text-to-animation
 ├── src                     # Source code directory
 │   ├── code_generator.py   # Generates Manim code from user input
 │   ├── manim_executor.py   # Executes Manim scripts and handles output
-│   ├── prompt_templates.py  # Defines prompt templates for user input
-│   └── utils.py            # Utility functions for common tasks
-├── assets                  # Directory for assets
-│   └── examples.json       # Example prompts and expected outputs
+│   ├── utils.py            # Utility functions for common tasks
+│   └── animation_modifier.py # Modifies existing Manim code based on user feedback
 ├── .env                    # Environment variables for configuration
 ├── requirements.txt        # Python dependencies for the project
-├── sample_animations       # Directory for sample animations
-│   └── default.py          # Sample Manim animation script
 ├── config.py               # Configuration settings for the application
 └── README.md               # Documentation for the project
 ```
@@ -54,7 +50,8 @@ python app.py
 
 - User-friendly interface for inputting animation descriptions.
 - Automatic generation of Manim code based on user input.
-- Execution of generated Manim scripts to produce animations.
+- Modification of existing Manim code based on user feedback.
+- Execution of generated and modified Manim scripts to produce animations.
 - Display of resulting animations directly in the web interface.
 
 ## Contributing
